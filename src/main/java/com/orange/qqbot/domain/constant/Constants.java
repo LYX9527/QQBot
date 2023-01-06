@@ -22,4 +22,13 @@ public class Constants {
      * http
      */
     public static final String HTTP = "http://";
+    /**
+     * https
+     */
+    public static final String HTTPS = "https://";
+
+    /**
+     * 群消息
+     */
+    public static final String GROUP_ID = "group_id";
 }
