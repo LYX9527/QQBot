@@ -18,4 +18,8 @@ public class Constants {
      * 格式化时间
      */
     public static final String DATE_TIME_FORMATTER = "yyyy-MM-dd HH:mm:ss";
+    /**
+     * http
+     */
+    public static final String HTTP = "http://";
 }

@@ -22,6 +22,7 @@ public class GroupMessageHandle {
 
     public void run() {
         System.out.println("-----------------------消息开始--------------------------");
+        System.out.println(postMessage);
         JSONObject sender = postMessage.getJSONObject("sender");
         String nickname = sender.getString("nickname");
         String card = sender.getString("card");

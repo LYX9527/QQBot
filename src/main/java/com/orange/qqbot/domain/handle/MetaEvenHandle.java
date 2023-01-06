@@ -1,6 +1,7 @@
 package com.orange.qqbot.domain.handle;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orange.qqbot.api.SendMessage;
 import com.orange.qqbot.domain.constant.Constants;
 
 import java.time.Instant;
