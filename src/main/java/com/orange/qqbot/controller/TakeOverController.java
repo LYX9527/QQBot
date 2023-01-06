@@ -1,13 +1,13 @@
 package com.orange.qqbot.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orange.qqbot.api.SendMessage;
+import com.orange.qqbot.domain.constant.CQFace;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.PostType;
 import com.orange.qqbot.domain.handle.GroupMessageHandle;
 import com.orange.qqbot.domain.handle.MetaEvenHandle;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author : yilantingfeng
@@ -38,5 +38,11 @@ public class TakeOverController {
         } else if (isMetaEvent) {
             new MetaEvenHandle().init(postMessage).run();
         }
+    }
+
+    @GetMapping("/send/{message}")
+    public String test(@PathVariable String message) {
+        SendMessage.sendPrivateMessage(CQFace.getCQFace(message), "2632938870", false);
+        return "test";
     }
 }

@@ -31,11 +31,15 @@ public class SendMessage {
         SendMessage.url = url;
     }
 
-    public static void sendPrivateMessage(String message, String userId) {
+    public static void sendPrivateMessage(String message, String userId, Boolean autoEscape) {
+        if (autoEscape == null) {
+            autoEscape = true;
+        }
         String requestUrl = Constants.HTTP + url + "/send_private_msg";
         JSONObject params = new JSONObject();
         params.put("user_id", userId);
         params.put("message", message);
+        params.put("auto_escape", autoEscape);
         String s = OkHttpUtil.postJsonParams(requestUrl, params.toJSONString(), new HashMap<>());
     }
 }
