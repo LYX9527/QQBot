@@ -2,11 +2,12 @@ package com.orange.qqbot.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.domain.constant.CQFace;
+import com.orange.qqbot.domain.constant.CQ;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.PostType;
 import com.orange.qqbot.domain.handle.GroupMessageHandle;
 import com.orange.qqbot.domain.handle.MetaEvenHandle;
+import com.orange.qqbot.domain.handle.eventhandel.HistoryTodayHandle;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -42,7 +43,13 @@ public class TakeOverController {
 
     @GetMapping("/send/{message}")
     public String test(@PathVariable String message) {
-        SendMessage.sendPrivateMessage(CQFace.getCQFace(message), "2632938870", false);
+        SendMessage.sendPrivateMessage(CQ.getCQFace(message), "2632938870", false);
+        return "test";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        HistoryTodayHandle.handle("921857372");
         return "test";
     }
 }

@@ -3,13 +3,13 @@ package com.orange.qqbot.utils;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by qhong on 2018/7/3 16:55
+ * Created by yilantingfen
+ * on 2023/01/06 16:55
  **/
 public class OkHttpUtil {
 
