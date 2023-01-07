@@ -2,6 +2,7 @@ package com.orange.qqbot.handle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
+import com.orange.qqbot.config.QBotConfig;
 import com.orange.qqbot.domain.constant.CQ;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.KeyWord;
@@ -36,7 +37,7 @@ public class GroupMessageHandle {
         String rawMessage = postMessage.getString("raw_message");
         // 匹配rawMessage中的CQ码中的at
         String atqq = rawMessage.replaceAll(".*\\[CQ:at,qq=(\\d+)\\].*", "$1");
-        String qq = SendMessage.getQq();
+        String qq = QBotConfig.getBotqq();
         String groupId = postMessage.getString(Constants.GROUP_ID);
         if (qq.equals(atqq)) {
             String message = rawMessage.replaceAll("\\[CQ:at,qq=" + qq + "\\]", "");

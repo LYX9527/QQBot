@@ -10,8 +10,9 @@ import com.orange.qqbot.handle.GroupMessageHandle;
 import com.orange.qqbot.handle.MetaEvenHandle;
 import com.orange.qqbot.handle.NoticeHandle;
 import com.orange.qqbot.handle.PrivateMessageHandle;
-import com.orange.qqbot.handle.eventhandel.HistoryTodayHandle;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author : yilantingfeng
@@ -27,39 +28,23 @@ public class TakeOverController {
     @PostMapping("/")
     public void takeOver(@RequestBody JSONObject postMessage) {
         String postType = postMessage.getString(Constants.POST_TYPE);
-        boolean isMessage = PostType.MESSAGE.equals(postType);
-        boolean isNotice = PostType.NOTICE.equals(postType);
-        boolean isRequest = PostType.REQUEST.equals(postType);
-        boolean isMetaEvent = PostType.META_EVENT.equals(postType);
-        if (isMessage) {
-            String messageType = postMessage.getString(Constants.MESSAGE_TYPE);
-            boolean isGroupMessage = MessageType.GROUP.equals(messageType);
-            boolean isPrivateMessage = MessageType.PRIVATE.equals(messageType);
-            if (isGroupMessage) {
-                new GroupMessageHandle().init(postMessage).run();
+        switch (postType) {
+            case PostType.META_EVENT -> new MetaEvenHandle().init(postMessage).run();
+            case PostType.NOTICE -> new NoticeHandle().init(postMessage).run();
+            case PostType.MESSAGE -> {
+                String messageType = postMessage.getString(Constants.MESSAGE_TYPE);
+                switch (messageType) {
+                    case MessageType.GROUP -> new GroupMessageHandle().init(postMessage).run();
+                    case MessageType.PRIVATE -> new PrivateMessageHandle().init(postMessage).run();
+                    default ->
+                            SendMessage.sendPrivateMessage(CQ.getCQAt(postMessage.getString(Constants.USER_ID)) + " 暂不支持该消息类型", postMessage.getString(Constants.USER_ID), false);
+                }
             }
-            if (isPrivateMessage) {
-                new PrivateMessageHandle().init(postMessage).run();
+            case PostType.REQUEST -> {
+                System.out.println("请求");
+                System.out.println(postMessage);
             }
-        } else if (isNotice) {
-            new NoticeHandle().init(postMessage).run();
-        } else if (isRequest) {
-            System.out.println("请求");
-            System.out.println(postMessage);
-        } else if (isMetaEvent) {
-            new MetaEvenHandle().init(postMessage).run();
+            default -> System.out.println("未知类型");
         }
-    }
-
-    @GetMapping("/send/{message}")
-    public String test(@PathVariable String message) {
-        SendMessage.sendPrivateMessage(CQ.getCQFace(message), "2632938870", false);
-        return "test";
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        HistoryTodayHandle.handle("921857372");
-        return "test";
     }
 }

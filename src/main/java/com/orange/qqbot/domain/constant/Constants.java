@@ -28,14 +28,19 @@ public class Constants {
     public static final String HTTPS = "https://";
 
     /**
-     * 群消息
+     * 群聊id
      */
     public static final String GROUP_ID = "group_id";
 
     /**
-     * 私聊消息
+     * 用户id
      */
     public static final String USER_ID = "user_id";
+
+    /**
+     * 操作者id
+     */
+    public static final String OPERATOR_ID = "operator_id";
 
     /**
      * 消息类型
@@ -46,5 +51,28 @@ public class Constants {
      * 消息内容
      */
     public static final String NOTICE_TYPE = "notice_type";
-
+    /**
+     * 消息id
+     */
+    public static final String MESSAGE_ID = "message_id";
+    /**
+     * 消息
+     */
+    public static final String MESSAGE = "message";
+    /**
+     * 自动转义
+     */
+    public static final String AUTO_ESCAPE = "auto_escape";
+    /**
+     * 时间戳
+     */
+    public static final String TIME = "time";
+    /**
+     * 消息发送者
+     */
+    public static final String SENDER = "sender";
+    /**
+     * 昵称
+     */
+    public static final String NICKNAME = "nickname";
 }

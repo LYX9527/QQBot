@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.domain.constant.CQ;
 import com.orange.qqbot.utils.OkHttpUtil;
 
 import java.util.HashMap;

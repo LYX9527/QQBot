@@ -3,6 +3,7 @@ package com.orange.qqbot.handle;
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.NoticeType;
+import com.orange.qqbot.handle.eventhandel.RecallHandle;
 
 /**
  * @author : yilantingfeng
@@ -40,7 +41,6 @@ public class NoticeHandle {
             case NoticeType.NOTIFY -> notifyHandle();
             default -> defaultHandle();
         }
-        System.out.println(postMessage);
         System.out.println("-----------------------通知消息结束--------------------------");
     }
 
@@ -70,10 +70,19 @@ public class NoticeHandle {
     }
 
     private void groupRecall() {
-        System.out.println("群消息撤回");
+        System.out.println(postMessage);
+        String messageId = postMessage.getString(Constants.MESSAGE_ID);
+        String userId = postMessage.getString(Constants.USER_ID);
+        String groupId = postMessage.getString(Constants.GROUP_ID);
+        String operatorId = postMessage.getString(Constants.OPERATOR_ID);
+        Long time = postMessage.getLong(Constants.TIME);
+        RecallHandle.groupHandle(messageId, groupId, userId, operatorId, time);
     }
 
     private void friendRecall() {
+        Long time = postMessage.getLong(Constants.TIME);
+        String messageId = postMessage.getString(Constants.MESSAGE_ID);
+        RecallHandle.friendHandle(messageId, time);
         System.out.println("好友消息撤回");
     }
 
@@ -86,16 +95,18 @@ public class NoticeHandle {
     }
 
     private void clientStatus() {
+        System.out.println("客户端状态变更");
     }
 
     private void essence() {
-
+        System.out.println("精华消息");
     }
 
     private void defaultHandle() {
-
+        System.out.println("未知通知类型");
     }
 
     private void notifyHandle() {
+        System.out.println("通知");
     }
 }
