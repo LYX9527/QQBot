@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -27,6 +28,8 @@ dependencies {
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
     implementation 'cn.hutool:hutool-all:5.8.3'
+    implementation 'org.aspectj:aspectjweaver:1.9.19'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
 }
 
 tasks.named('test') {

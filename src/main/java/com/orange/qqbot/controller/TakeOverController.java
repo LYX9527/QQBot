@@ -4,10 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
 import com.orange.qqbot.domain.constant.CQ;
 import com.orange.qqbot.domain.constant.Constants;
+import com.orange.qqbot.domain.constant.MessageType;
 import com.orange.qqbot.domain.constant.PostType;
-import com.orange.qqbot.domain.handle.GroupMessageHandle;
-import com.orange.qqbot.domain.handle.MetaEvenHandle;
-import com.orange.qqbot.domain.handle.eventhandel.HistoryTodayHandle;
+import com.orange.qqbot.handle.GroupMessageHandle;
+import com.orange.qqbot.handle.MetaEvenHandle;
+import com.orange.qqbot.handle.NoticeHandle;
+import com.orange.qqbot.handle.PrivateMessageHandle;
+import com.orange.qqbot.handle.eventhandel.HistoryTodayHandle;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -29,10 +32,17 @@ public class TakeOverController {
         boolean isRequest = PostType.REQUEST.equals(postType);
         boolean isMetaEvent = PostType.META_EVENT.equals(postType);
         if (isMessage) {
-            new GroupMessageHandle().init(postMessage).run();
+            String messageType = postMessage.getString(Constants.MESSAGE_TYPE);
+            boolean isGroupMessage = MessageType.GROUP.equals(messageType);
+            boolean isPrivateMessage = MessageType.PRIVATE.equals(messageType);
+            if (isGroupMessage) {
+                new GroupMessageHandle().init(postMessage).run();
+            }
+            if (isPrivateMessage) {
+                new PrivateMessageHandle().init(postMessage).run();
+            }
         } else if (isNotice) {
-            System.out.println("通知");
-            System.out.println(postMessage);
+            new NoticeHandle().init(postMessage).run();
         } else if (isRequest) {
             System.out.println("请求");
             System.out.println(postMessage);

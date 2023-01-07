@@ -1,4 +1,4 @@
-package com.orange.qqbot.domain.handle.eventhandel;
+package com.orange.qqbot.handle.eventhandel;
 
 import cn.hutool.core.date.ChineseDate;
 import com.orange.qqbot.api.SendMessage;

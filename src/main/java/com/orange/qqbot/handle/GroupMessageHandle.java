@@ -1,12 +1,12 @@
-package com.orange.qqbot.domain.handle;
+package com.orange.qqbot.handle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
 import com.orange.qqbot.domain.constant.CQ;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.KeyWord;
-import com.orange.qqbot.domain.handle.eventhandel.HotSearchHandle;
-import com.orange.qqbot.domain.handle.eventhandel.NowTimeHandle;
+import com.orange.qqbot.handle.eventhandel.HotSearchHandle;
+import com.orange.qqbot.handle.eventhandel.NowTimeHandle;
 
 /**
  * @author : yilantingfeng
@@ -27,7 +27,7 @@ public class GroupMessageHandle {
     }
 
     public void run() {
-        System.out.println("-----------------------消息开始--------------------------");
+        System.out.println("-----------------------群消息开始--------------------------");
         System.out.println(postMessage);
         JSONObject sender = postMessage.getJSONObject("sender");
         String nickname = sender.getString("nickname");

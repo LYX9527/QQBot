@@ -13,9 +13,9 @@ public class MessageType {
     /**
      * 群消息
      */
-    private static final String GROUP = "group";
+    public static final String GROUP = "group";
     /**
      * 私聊消息
      */
-    private static final String PRIVATE = "private";
+    public static final String PRIVATE = "private";
 }

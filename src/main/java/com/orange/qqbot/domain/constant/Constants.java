@@ -31,4 +31,20 @@ public class Constants {
      * 群消息
      */
     public static final String GROUP_ID = "group_id";
+
+    /**
+     * 私聊消息
+     */
+    public static final String USER_ID = "user_id";
+
+    /**
+     * 消息类型
+     */
+    public static final String MESSAGE_TYPE = "message_type";
+
+    /**
+     * 消息内容
+     */
+    public static final String NOTICE_TYPE = "notice_type";
+
 }

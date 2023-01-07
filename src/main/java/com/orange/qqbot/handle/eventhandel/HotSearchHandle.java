@@ -1,4 +1,4 @@
-package com.orange.qqbot.domain.handle.eventhandel;
+package com.orange.qqbot.handle.eventhandel;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

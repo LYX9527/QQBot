@@ -1,4 +1,4 @@
-package com.orange.qqbot.domain.handle.ruleshandel;
+package com.orange.qqbot.handle.ruleshandel;
 
 /**
  * @author : yilantingfeng
