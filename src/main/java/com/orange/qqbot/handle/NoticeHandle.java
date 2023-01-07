@@ -107,6 +107,7 @@ public class NoticeHandle {
     }
 
     private void notifyHandle() {
+        System.out.println(postMessage);
         System.out.println("通知");
     }
 }

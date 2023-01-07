@@ -31,4 +31,17 @@ public class AutoJob {
     public void autoJob2() {
         HistoryTodayHandle.handle("1046681020");
     }
+
+    @Scheduled(cron = "0 0 7 * * ? ")
+    public void autoJob3() {
+        for (int i = 0; i < 5; i++) {
+            SendMessage.sendGroupMessage(CQ.getCQPoke("1132898830"), "1046681020", false);
+            SendMessage.sendGroupMessage(CQ.getCQAt("1132898830") + "起床啦！", "1046681020", false);
+            try {
+                Thread.sleep(60 * 1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }
