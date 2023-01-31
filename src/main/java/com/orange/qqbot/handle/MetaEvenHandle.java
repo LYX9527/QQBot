@@ -1,7 +1,10 @@
 package com.orange.qqbot.handle;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orange.qqbot.config.MessageHandlerFactory;
 import com.orange.qqbot.domain.constant.Constants;
+import com.orange.qqbot.domain.constant.PostType;
+import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -17,7 +20,8 @@ import java.time.format.DateTimeFormatter;
  * @description:
  * @date : 2023/1/6 15:25
  */
-public class MetaEvenHandle {
+@Component
+public class MetaEvenHandle implements Handler {
     private static JSONObject postMessage;
 
     public MetaEvenHandle init(JSONObject postMessage) {
@@ -34,5 +38,10 @@ public class MetaEvenHandle {
         if (!aBoolean) {
             System.out.println("当前时间：" + time + "，机器人当前状态：" + "离线");
         }
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        MessageHandlerFactory.register(PostType.META_EVENT, this);
     }
 }

@@ -1,9 +1,12 @@
 package com.orange.qqbot.handle;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orange.qqbot.config.MessageHandlerFactory;
 import com.orange.qqbot.domain.constant.Constants;
 import com.orange.qqbot.domain.constant.NoticeType;
+import com.orange.qqbot.domain.constant.PostType;
 import com.orange.qqbot.handle.eventhandel.RecallHandle;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : yilantingfeng
@@ -14,7 +17,8 @@ import com.orange.qqbot.handle.eventhandel.RecallHandle;
  * @description:
  * @date : 2023/1/7 17:23
  */
-public class NoticeHandle {
+@Component
+public class NoticeHandle implements Handler {
     private static JSONObject postMessage;
 
     public NoticeHandle init(JSONObject postMessage) {
@@ -109,5 +113,10 @@ public class NoticeHandle {
     private void notifyHandle() {
         System.out.println(postMessage);
         System.out.println("通知");
+    }
+
+    @Override
+    public void afterPropertiesSet() {
+        MessageHandlerFactory.register(PostType.NOTICE, this);
     }
 }

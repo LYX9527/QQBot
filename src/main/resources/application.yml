@@ -1,6 +1,19 @@
-server:
-  port: 9011
 qbot:
   url: 192.168.2.158:5700
   botqq: 2023311861
   adminqq: 2632938870
+server:
+  port: 9011
+spring:
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+  application:
+    name: business
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://124.223.203.125:3306/qbot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    username: root
+    password: root123456
+    driverClassName: com.mysql.cj.jdbc.Driver

@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
  */
 @Service
 public class AutoJob {
-    @Scheduled(cron = "0 0 0/1 * * ? ")
+//    @Scheduled(cron = "0 0 0/1 * * ? ")
     public void autoJob() {
         SendMessage.sendPrivateMessage(CQ.getCQFace("13") + "整点报时,现在是北京时间:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMATTER)), "2632938870", false);
         SendMessage.sendGroupMessage(CQ.getCQFace("13") + "整点报时,现在是北京时间:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMATTER)), "1046681020", false);
