@@ -1,4 +1,4 @@
-package com.orange.qqbot.Entrance;
+package com.orange.qqbot.entrance;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.MessageHandlerFactory;

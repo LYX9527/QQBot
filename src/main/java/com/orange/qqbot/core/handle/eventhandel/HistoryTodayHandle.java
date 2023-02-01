@@ -1,6 +1,13 @@
 package com.orange.qqbot.core.handle.eventhandel;
 
+import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
+import com.orange.qqbot.config.KeyWordHandlerFactory;
+import com.orange.qqbot.core.KWHandler;
+import com.orange.qqbot.core.domain.constant.Constants;
+import com.orange.qqbot.core.domain.constant.KeyWord;
+import com.orange.qqbot.core.domain.constant.MessageType;
+import com.orange.qqbot.utils.MessageParser;
 import com.orange.qqbot.utils.OkHttpUtil;
 
 import java.util.HashMap;
@@ -14,9 +21,42 @@ import java.util.HashMap;
  * @description:
  * @date : 2023/1/6 21:37
  */
-public class HistoryTodayHandle {
+public class HistoryTodayHandle implements KWHandler {
+    private static JSONObject postMessage;
 
-    public static void handle(String... groupIds) {
+    @Override
+    public HistoryTodayHandle init(JSONObject t) {
+        HistoryTodayHandle.postMessage = t;
+        return this;
+    }
+
+    @Override
+    public void run(String messageType) {
+        if (MessageType.GROUP.equals(messageType)) {
+            handleGroup();
+        } else if (MessageType.PRIVATE.equals(messageType)) {
+            handlePrivate();
+        }
+    }
+
+    @Override
+    public void handlePrivate() {
+        MessageParser messageParser = new MessageParser(postMessage);
+        SendMessage.sendPrivateMessage(getContent(), messageParser.getSenderQq(), false);
+    }
+
+    @Override
+    public void handleGroup() {
+        SendMessage.sendGroupMessage(getContent(), postMessage.getString(Constants.GROUP_ID), false);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        KeyWordHandlerFactory.register(KeyWord.HISTORY_TODAY, this);
+        KeyWordHandlerFactory.register(KeyWord.HISTORY_TODAY, MessageType.PRIVATE, this);
+    }
+
+    private String getContent() {
         String s = OkHttpUtil.get("https://api.iwyu.com/API/lsjt/", new HashMap<>(), new HashMap<>());
         String[] split = s
                 .replaceAll("</br>", "")
@@ -30,9 +70,6 @@ public class HistoryTodayHandle {
         }
         sb.append("\n");
         sb.append("----------------到底啦！---------------");
-        String sendContent = sb.toString();
-        for (String groupId : groupIds) {
-            SendMessage.sendGroupMessage(sendContent, groupId, false);
-        }
+        return sb.toString();
     }
 }

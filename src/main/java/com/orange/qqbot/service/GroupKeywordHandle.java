@@ -1,9 +1,12 @@
 package com.orange.qqbot.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.orange.qqbot.config.KeyWordHandlerFactory;
 import com.orange.qqbot.core.CustomizeMessageHandle;
+import com.orange.qqbot.core.annotation.EventHandler;
 import com.orange.qqbot.core.annotation.GroupMessage;
-import org.springframework.stereotype.Service;
+import com.orange.qqbot.core.domain.constant.KeyWord;
+import com.orange.qqbot.core.domain.constant.MessageType;
 
 /**
  * @author : yilantingfeng
@@ -14,12 +17,11 @@ import org.springframework.stereotype.Service;
  * @description:
  * @date : 2023/2/1 11:06
  */
-@Service
-public class TestHandle implements CustomizeMessageHandle {
+@EventHandler
+public class GroupKeywordHandle implements CustomizeMessageHandle {
     @Override
     @GroupMessage
     public void handle(JSONObject postMessage) {
-        System.out.println(postMessage);
-        System.out.println("我是继承了的test");
+        KeyWordHandlerFactory.getInvokeHandler(KeyWord.KEYWORD, MessageType.GROUP).init(postMessage).run(MessageType.GROUP);
     }
 }
