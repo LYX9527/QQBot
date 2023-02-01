@@ -16,54 +16,11 @@ public class OkHttpUtil {
     private static final Logger logger = LoggerFactory.getLogger(OkHttpUtil.class);
 
     /**
-     * 根据map获取get请求参数
-     *
-     * @param queries
-     * @return
-     */
-    public static StringBuffer getQueryString(String url, Map<String, String> queries) {
-        StringBuffer sb = new StringBuffer(url);
-        if (queries != null && queries.keySet().size() > 0) {
-            boolean firstFlag = true;
-            for (Map.Entry<String, String> entry : queries.entrySet()) {
-                if (firstFlag) {
-                    sb.append("?").append(entry.getKey()).append("=").append(entry.getValue());
-                    firstFlag = false;
-                } else {
-                    sb.append("&").append(entry.getKey()).append("=").append(entry.getValue());
-                }
-            }
-        }
-        return sb;
-    }
-
-    /**
-     * 调用okhttp的newCall方法
-     *
-     * @param request
-     * @return
-     */
-    private static String execNewCall(Request request) {
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .build();
-        try (Response response = client.newCall(request).execute()) {
-            assert response.body() != null;
-            return response.body().string();
-        } catch (Exception e) {
-            logger.error("okhttp3 put error >> ex = {}", e.getMessage());
-        }
-        return "";
-    }
-
-    /**
      * get
      *
      * @param url     请求的url
      * @param queries 请求的参数，在浏览器？后面的数据，没有可以传null
-     * @return
+     * @return 返回的数据
      */
     public static String get(String url, Map<String, String> queries, Map<String, String> headers) {
         StringBuffer sb = getQueryString(url, queries);
@@ -129,7 +86,6 @@ public class OkHttpUtil {
      */
     public static String postMapParams(String url, Map<String, String> params, Map<String, String> headers) {
         String s = getQueryString("", params).toString();
-        System.out.println(s);
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"), s.replace("?", ""));
         Request request = new Request.Builder()
                 .url(url)
@@ -139,4 +95,46 @@ public class OkHttpUtil {
         return execNewCall(request);
     }
 
+    /**
+     * 根据map获取get请求参数
+     *
+     * @param queries 请求的参数，在浏览器？后面的数据，没有可以传null
+     * @return 返回的数据
+     */
+    private static StringBuffer getQueryString(String url, Map<String, String> queries) {
+        StringBuffer sb = new StringBuffer(url);
+        if (queries != null && queries.keySet().size() > 0) {
+            boolean firstFlag = true;
+            for (Map.Entry<String, String> entry : queries.entrySet()) {
+                if (firstFlag) {
+                    sb.append("?").append(entry.getKey()).append("=").append(entry.getValue());
+                    firstFlag = false;
+                } else {
+                    sb.append("&").append(entry.getKey()).append("=").append(entry.getValue());
+                }
+            }
+        }
+        return sb;
+    }
+
+    /**
+     * 调用okhttp的newCall方法
+     *
+     * @param request
+     * @return
+     */
+    private static String execNewCall(Request request) {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .build();
+        try (Response response = client.newCall(request).execute()) {
+            assert response.body() != null;
+            return response.body().string();
+        } catch (Exception e) {
+            logger.error("okhttp3 put error >> ex = {}", e.getMessage());
+        }
+        return "";
+    }
 }

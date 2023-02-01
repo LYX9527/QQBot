@@ -2,9 +2,9 @@ package com.orange.qqbot.api;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.QBotConfig;
-import com.orange.qqbot.domain.RecallMessage;
-import com.orange.qqbot.domain.constant.Api;
-import com.orange.qqbot.domain.constant.Constants;
+import com.orange.qqbot.core.domain.RecallMessage;
+import com.orange.qqbot.core.domain.constant.Api;
+import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.utils.OkHttpUtil;
 
 import java.util.HashMap;

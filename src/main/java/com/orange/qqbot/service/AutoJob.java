@@ -1,9 +1,9 @@
 package com.orange.qqbot.service;
 
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.domain.constant.CQ;
-import com.orange.qqbot.domain.constant.Constants;
-import com.orange.qqbot.handle.eventhandel.HistoryTodayHandle;
+import com.orange.qqbot.core.domain.constant.CQ;
+import com.orange.qqbot.core.domain.constant.Constants;
+import com.orange.qqbot.core.handle.eventhandel.HistoryTodayHandle;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 

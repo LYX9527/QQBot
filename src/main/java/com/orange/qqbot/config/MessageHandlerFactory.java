@@ -1,6 +1,6 @@
 package com.orange.qqbot.config;
 
-import com.orange.qqbot.handle.Handler;
+import com.orange.qqbot.core.Handler;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
