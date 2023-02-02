@@ -12,9 +12,9 @@ import org.springframework.beans.factory.InitializingBean;
  * @description:
  * @date : 2023/1/31 12:49
  */
-public interface Handler extends InitializingBean {
+public interface MessageHandler extends InitializingBean {
 
-    <T extends Handler> T init(JSONObject t);
+    <T extends MessageHandler> T init(JSONObject t);
 
     void run();
 }

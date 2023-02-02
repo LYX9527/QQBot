@@ -1,10 +1,10 @@
-package com.orange.qqbot.service;
+package com.orange.qqbot.register;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.KeyWordHandlerFactory;
 import com.orange.qqbot.core.CustomizeMessageHandle;
 import com.orange.qqbot.core.annotation.EventHandler;
-import com.orange.qqbot.core.annotation.GroupMessage;
+import com.orange.qqbot.core.annotation.PrivateMessage;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
 
@@ -13,15 +13,15 @@ import com.orange.qqbot.core.domain.constant.MessageType;
  * @version : v1.0
  * @projectName : QQBot
  * @package : com.orange.qqbot.service
- * @className : TestAnnotation
+ * @className : PrivateMessageHandle
  * @description:
- * @date : 2023/2/1 11:06
+ * @date : 2023/2/1 18:39
  */
 @EventHandler
-public class GroupKeywordHandle implements CustomizeMessageHandle {
+public class PrivateMessageEventRegister implements CustomizeMessageHandle {
     @Override
-    @GroupMessage
+    @PrivateMessage
     public void handle(JSONObject postMessage) {
-        KeyWordHandlerFactory.getInvokeHandler(KeyWord.KEYWORD, MessageType.GROUP).init(postMessage).run(MessageType.GROUP);
+        KeyWordHandlerFactory.getInvokeHandler(KeyWord.KEYWORD, MessageType.PRIVATE).init(postMessage).run(MessageType.PRIVATE);
     }
 }

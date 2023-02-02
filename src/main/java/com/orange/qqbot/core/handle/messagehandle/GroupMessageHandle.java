@@ -2,7 +2,7 @@ package com.orange.qqbot.core.handle.messagehandle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.MessageHandlerFactory;
-import com.orange.qqbot.core.Handler;
+import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.annotation.EventHandler;
 import com.orange.qqbot.core.annotation.GroupMessage;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -24,7 +24,7 @@ import java.util.Map;
  * @date : 2023/1/6 15:05
  */
 @Component
-public class GroupMessageHandle implements Handler {
+public class GroupMessageHandle implements MessageHandler {
     @Autowired
     private ApplicationContext applicationContext;
     private static JSONObject postMessage;

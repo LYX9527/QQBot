@@ -1,6 +1,6 @@
 package com.orange.qqbot.config;
 
-import com.orange.qqbot.core.Handler;
+import com.orange.qqbot.core.MessageHandler;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
@@ -16,16 +16,16 @@ import java.util.Map;
  * @date : 2023/1/31 12:53
  */
 public class MessageHandlerFactory {
-    private static final Map<String, Handler> handlerMap = new HashMap<>();
+    private static final Map<String, MessageHandler> handlerMap = new HashMap<>();
 
-    public static Handler getInvokeHandler(String key) {
+    public static MessageHandler getInvokeHandler(String key) {
         return handlerMap.get(key);
     }
 
-    public static void register(String key, Handler handler) {
-        if (StringUtils.isEmpty(key) || handler == null) {
+    public static void register(String key, MessageHandler messageHandler) {
+        if (StringUtils.isEmpty(key) || messageHandler == null) {
             return;
         }
-        handlerMap.put(key, handler);
+        handlerMap.put(key, messageHandler);
     }
 }

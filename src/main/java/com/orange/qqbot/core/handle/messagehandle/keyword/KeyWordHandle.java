@@ -1,4 +1,4 @@
-package com.orange.qqbot.core.handle.eventhandel;
+package com.orange.qqbot.core.handle.messagehandle.keyword;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.KeyWordHandlerFactory;

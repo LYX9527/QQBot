@@ -1,4 +1,4 @@
-package com.orange.qqbot.core.handle.eventhandel;
+package com.orange.qqbot.core.handle.noticehandle;
 
 import com.orange.qqbot.api.GetMessage;
 import com.orange.qqbot.api.SendMessage;

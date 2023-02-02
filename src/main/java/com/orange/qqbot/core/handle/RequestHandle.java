@@ -2,7 +2,7 @@ package com.orange.qqbot.core.handle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.MessageHandlerFactory;
-import com.orange.qqbot.core.Handler;
+import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.domain.constant.PostType;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @date : 2023/1/31 13:13
  */
 @Component
-public class RequestHandle implements Handler {
+public class RequestHandle implements MessageHandler {
     private static JSONObject postMessage;
 
     @Override

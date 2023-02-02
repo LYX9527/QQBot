@@ -2,11 +2,11 @@ package com.orange.qqbot.core.handle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.MessageHandlerFactory;
-import com.orange.qqbot.core.Handler;
+import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.NoticeType;
 import com.orange.qqbot.core.domain.constant.PostType;
-import com.orange.qqbot.core.handle.eventhandel.RecallHandle;
+import com.orange.qqbot.core.handle.noticehandle.RecallHandle;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  * @date : 2023/1/7 17:23
  */
 @Component
-public class NoticeHandle implements Handler {
+public class NoticeHandle implements MessageHandler {
     private static JSONObject postMessage;
 
     public NoticeHandle init(JSONObject postMessage) {
