@@ -2,11 +2,13 @@ package com.orange.qqbot.core.handle.eventhandel;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.KeyWordHandlerFactory;
-import com.orange.qqbot.core.KWHandler;
+import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.CommonHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
 import com.orange.qqbot.utils.MessageParser;
+import org.springframework.stereotype.Component;
 
 /**
  * @author : yilantingfeng
@@ -17,24 +19,17 @@ import com.orange.qqbot.utils.MessageParser;
  * @description:
  * @date : 2023/1/8 17:46
  */
-public class KeyWordHandle implements KWHandler {
+@Component
+public class KeyWordHandle implements CommonHandler {
 
     private static JSONObject postMessage;
-
-    public static void handle(String message, String groupId) {
-        String keyword = message.trim();
-        switch (keyword) {
-            case KeyWord.TIME -> NowTimeHandle.handle(groupId);
-            case KeyWord.HOT_SEARCH -> HotSearchHandle.handle(groupId);
-            default -> System.out.println("未知关键字");
-        }
-    }
 
     @Override
     public KeyWordHandle init(JSONObject t) {
         KeyWordHandle.postMessage = t;
         return this;
     }
+
     @Override
     public void run(String messageType) {
         String message;
@@ -44,15 +39,16 @@ public class KeyWordHandle implements KWHandler {
             MessageParser messageParser = new MessageParser(postMessage);
             message = messageParser.getAtMessage();
         }
-        KWHandler invokeHandler = KeyWordHandlerFactory.getInvokeHandler(message, messageType);
+        CommonHandler invokeHandler = KeyWordHandlerFactory.getInvokeHandler(message.trim(), messageType);
         try {
             invokeHandler.init(postMessage).run(messageType);
         } catch (Exception e) {
-            e.printStackTrace();
+            MessageHandlerFactory.getInvokeHandler(Constants.DEFAULT).init(postMessage).run();
         }
     }
+
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         KeyWordHandlerFactory.register(KeyWord.KEYWORD, this);
         KeyWordHandlerFactory.register(KeyWord.KEYWORD, MessageType.PRIVATE, this);
     }

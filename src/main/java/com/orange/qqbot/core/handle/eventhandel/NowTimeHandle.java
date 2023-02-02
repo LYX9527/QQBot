@@ -1,7 +1,17 @@
 package com.orange.qqbot.core.handle.eventhandel;
 
 import cn.hutool.core.date.ChineseDate;
+import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
+import com.orange.qqbot.config.KeyWordHandlerFactory;
+import com.orange.qqbot.core.CommonHandler;
+import com.orange.qqbot.core.domain.constant.Constants;
+import com.orange.qqbot.core.domain.constant.KeyWord;
+import com.orange.qqbot.core.domain.constant.MessageType;
+import com.orange.qqbot.utils.MessageParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,9 +25,42 @@ import java.time.format.DateTimeFormatter;
  * @className : NowTimeHandle
  * @description:
  * @date : 2023/1/6 20:19
+ * @description : 当前时间处理内置类
  */
-public class NowTimeHandle {
-    public static void handle(String groupId) {
+@Component
+public class NowTimeHandle implements CommonHandler {
+    private static final Logger logger = LoggerFactory.getLogger(NowTimeHandle.class);
+    private static JSONObject postMessage;
+
+    @Override
+    public NowTimeHandle init(JSONObject t) {
+        NowTimeHandle.postMessage = t;
+        return this;
+    }
+
+    @Override
+    public void handlePrivate() {
+        MessageParser messageParser = new MessageParser(postMessage);
+        String senderQq = messageParser.getSenderQq();
+        SendMessage.sendPrivateMessage(getContent(), senderQq, false);
+        logger.info("发送当前时间成功,在私聊《" + senderQq + "》");
+    }
+
+    @Override
+    public void handleGroup() {
+        String groupId = postMessage.getString(Constants.GROUP_ID);
+        SendMessage.sendGroupMessage(getContent(), groupId, false);
+        logger.info("发送当前时间成功成功,在群《" + groupId + "》");
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        KeyWordHandlerFactory.register(KeyWord.TIME, this);
+        KeyWordHandlerFactory.register(KeyWord.TIME, MessageType.PRIVATE, this);
+    }
+
+    @Override
+    public String getContent() {
         ChineseDate chineseDate = new ChineseDate(LocalDate.now());
         StringBuilder sb = new StringBuilder();
         String s = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy年MM月dd日 HH:mm:ss"));
@@ -38,6 +81,6 @@ public class NowTimeHandle {
         sb.append("农历:");
         String ch = chineseDate.toString();
         sb.append(ch);
-        SendMessage.sendGroupMessage(sb.toString(), groupId, false);
+        return sb.toString();
     }
 }

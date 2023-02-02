@@ -32,7 +32,7 @@ public class RequestHandle implements Handler {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         MessageHandlerFactory.register(PostType.REQUEST, this);
     }
 }

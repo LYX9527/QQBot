@@ -35,18 +35,6 @@ public class PrivateMessageHandle implements Handler {
     }
 
     public void run() {
-        System.out.println("-----------------------私聊消息开始--------------------------");
-        System.out.println(postMessage);
-        System.out.println("-----------------------私聊消息结束--------------------------");
-        registerCustomizeHandler();
-    }
-
-    @Override
-    public void afterPropertiesSet() throws Exception {
-        MessageHandlerFactory.register(MessageType.PRIVATE, this);
-    }
-
-    private void registerCustomizeHandler() {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(EventHandler.class);
         beansWithAnnotation.forEach((k, v) -> {
             Class<?> aClass = v.getClass();
@@ -61,6 +49,10 @@ public class PrivateMessageHandle implements Handler {
                 }
             }
         });
+    }
 
+    @Override
+    public void afterPropertiesSet() {
+        MessageHandlerFactory.register(MessageType.PRIVATE, this);
     }
 }

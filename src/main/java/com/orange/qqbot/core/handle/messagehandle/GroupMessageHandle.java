@@ -6,8 +6,6 @@ import com.orange.qqbot.core.Handler;
 import com.orange.qqbot.core.annotation.EventHandler;
 import com.orange.qqbot.core.annotation.GroupMessage;
 import com.orange.qqbot.core.domain.constant.MessageType;
-import com.orange.qqbot.core.handle.eventhandel.KeyWordHandle;
-import com.orange.qqbot.utils.MessageParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
@@ -37,27 +35,6 @@ public class GroupMessageHandle implements Handler {
     }
 
     public void run() {
-        System.out.println("-----------------------群消息开始--------------------------");
-        MessageParser messageParser = new MessageParser(postMessage);
-        String nickname = messageParser.getSenderNickname();
-        String card = messageParser.getSenderCard();
-        String rawMessage = messageParser.getRawMessage();
-        String groupId = messageParser.getGroupId();
-        if (messageParser.isAtBot()) {
-            String message = messageParser.getAtMessage();
-            KeyWordHandle.handle(message, groupId);
-        }
-        System.out.println(card + "(" + nickname + "):" + rawMessage);
-        System.out.println("-----------------------消息结束--------------------------");
-        registerCustomizeHandler();
-    }
-
-    @Override
-    public void afterPropertiesSet() {
-        MessageHandlerFactory.register(MessageType.GROUP, this);
-    }
-
-    private void registerCustomizeHandler() {
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(EventHandler.class);
         beansWithAnnotation.forEach((k, v) -> {
             Class<?> aClass = v.getClass();
@@ -72,6 +49,10 @@ public class GroupMessageHandle implements Handler {
                 }
             }
         });
+    }
 
+    @Override
+    public void afterPropertiesSet() {
+        MessageHandlerFactory.register(MessageType.GROUP, this);
     }
 }

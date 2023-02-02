@@ -83,4 +83,5 @@ public class Constants {
      * 行消息
      */
     public static final String RAW_MESSAGE = "raw_message";
+    public static final String DEFAULT = "default";
 }

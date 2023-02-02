@@ -33,7 +33,7 @@ public class MessageHandle implements Handler {
         try {
             invokeHandler.init(postMessage).run();
         } catch (Exception e) {
-            e.printStackTrace();
+            MessageHandlerFactory.getInvokeHandler(Constants.DEFAULT).init(postMessage).run();
         }
     }
 

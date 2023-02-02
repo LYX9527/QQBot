@@ -3,6 +3,7 @@ package com.orange.qqbot.core.handle;
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.config.MessageHandlerFactory;
 import com.orange.qqbot.core.Handler;
+import com.orange.qqbot.core.domain.constant.Constants;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,19 +17,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class DefaultHandel implements Handler {
+    private static JSONObject postMessage;
+
     @Override
-    public <T extends Handler> T init(JSONObject t) {
-        return null;
+    public DefaultHandel init(JSONObject t) {
+        DefaultHandel.postMessage = t;
+        return this;
     }
 
     @Override
     public void run() {
-        System.out.println("默认处理");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        MessageHandlerFactory.register(null, this);
+        MessageHandlerFactory.register(Constants.DEFAULT, this);
     }
 
 }
