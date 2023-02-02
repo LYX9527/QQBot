@@ -1,7 +1,7 @@
 package com.orange.qqbot.core.handle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.factory.EventHandlerFactory;
 import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class DefaultHandel implements MessageHandler {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        MessageHandlerFactory.register(Constants.DEFAULT, this);
+        EventHandlerFactory.register(Constants.DEFAULT, this);
     }
 
 }

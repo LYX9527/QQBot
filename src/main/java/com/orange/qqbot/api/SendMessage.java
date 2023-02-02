@@ -5,6 +5,8 @@ import com.orange.qqbot.config.QBotConfig;
 import com.orange.qqbot.core.domain.constant.Api;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.utils.OkHttpUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -19,6 +21,7 @@ import java.util.HashMap;
  */
 
 public class SendMessage {
+    private static final Logger logger = LoggerFactory.getLogger(SendMessage.class);
 
     /**
      * 发送私聊消息
@@ -37,6 +40,7 @@ public class SendMessage {
         params.put(Constants.MESSAGE, message);
         params.put(Constants.AUTO_ESCAPE, autoEscape);
         String s = OkHttpUtil.postJsonParams(requestUrl, params.toJSONString(), new HashMap<>());
+        System.out.println(s);
     }
 
     /**
@@ -56,5 +60,6 @@ public class SendMessage {
         params.put(Constants.MESSAGE, message);
         params.put(Constants.AUTO_ESCAPE, autoEscape);
         String s = OkHttpUtil.postJsonParams(requestUrl, params.toJSONString(), new HashMap<>());
+        System.out.println(s);
     }
 }

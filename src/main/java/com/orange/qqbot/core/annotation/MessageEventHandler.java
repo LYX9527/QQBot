@@ -18,5 +18,5 @@ import java.lang.annotation.*;
 @Description("处理器")
 @Target({ElementType.TYPE})
 @Component
-public @interface EventHandler {
+public @interface MessageEventHandler {
 }

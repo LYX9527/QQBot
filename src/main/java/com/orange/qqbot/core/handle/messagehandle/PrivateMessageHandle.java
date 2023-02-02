@@ -1,9 +1,9 @@
 package com.orange.qqbot.core.handle.messagehandle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.factory.MessageHandlerFactory;
 import com.orange.qqbot.core.MessageHandler;
-import com.orange.qqbot.core.annotation.EventHandler;
+import com.orange.qqbot.core.annotation.MessageEventHandler;
 import com.orange.qqbot.core.annotation.PrivateMessage;
 import com.orange.qqbot.core.domain.constant.MessageType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +35,7 @@ public class PrivateMessageHandle implements MessageHandler {
     }
 
     public void run() {
-        Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(EventHandler.class);
+        Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(MessageEventHandler.class);
         beansWithAnnotation.forEach((k, v) -> {
             Class<?> aClass = v.getClass();
             Method[] methods = aClass.getMethods();

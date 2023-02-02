@@ -1,9 +1,9 @@
 package com.orange.qqbot.entrance;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.factory.EventHandlerFactory;
+import com.orange.qqbot.core.CommonHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
-import com.orange.qqbot.core.MessageHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +24,9 @@ public class TakeOverEntrance {
     @PostMapping("/")
     public void takeOver(@RequestBody JSONObject postMessage) {
         String postType = postMessage.getString(Constants.POST_TYPE);
-        MessageHandler invokeMessageHandler = MessageHandlerFactory.getInvokeHandler(postType);
+        CommonHandler invokeHandler = EventHandlerFactory.getInvokeHandler(postType);
         try {
-            invokeMessageHandler.init(postMessage).run();
+            invokeHandler.init(postMessage).run();
         } catch (Exception e) {
             log.error("takeOver error", e);
         }

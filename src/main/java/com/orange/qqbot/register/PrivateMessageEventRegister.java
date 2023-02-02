@@ -1,9 +1,9 @@
 package com.orange.qqbot.register;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.KeyWordHandlerFactory;
+import com.orange.qqbot.core.factory.KeyWordHandlerFactory;
 import com.orange.qqbot.core.CustomizeMessageHandle;
-import com.orange.qqbot.core.annotation.EventHandler;
+import com.orange.qqbot.core.annotation.MessageEventHandler;
 import com.orange.qqbot.core.annotation.PrivateMessage;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -17,7 +17,7 @@ import com.orange.qqbot.core.domain.constant.MessageType;
  * @description:
  * @date : 2023/2/1 18:39
  */
-@EventHandler
+@MessageEventHandler
 public class PrivateMessageEventRegister implements CustomizeMessageHandle {
     @Override
     @PrivateMessage

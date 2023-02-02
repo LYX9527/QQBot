@@ -1,7 +1,7 @@
 package com.orange.qqbot.core.handle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.factory.MessageHandlerFactory;
 import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.domain.constant.PostType;
 import org.springframework.stereotype.Component;

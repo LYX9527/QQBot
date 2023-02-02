@@ -2,8 +2,8 @@ package com.orange.qqbot.core.handle.messagehandle.keyword;
 
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.config.KeyWordHandlerFactory;
-import com.orange.qqbot.core.CommonHandler;
+import com.orange.qqbot.core.factory.KeyWordHandlerFactory;
+import com.orange.qqbot.core.KeywordHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -26,7 +26,7 @@ import java.util.HashMap;
  * @description : 历史上的今天处理内置类
  */
 @Component
-public class HistoryTodayHandle implements CommonHandler {
+public class HistoryTodayHandle implements KeywordHandler {
     private static final Logger logger = LoggerFactory.getLogger(HistoryTodayHandle.class);
     private static JSONObject postMessage;
 
@@ -48,7 +48,6 @@ public class HistoryTodayHandle implements CommonHandler {
         String senderQq = messageParser.getSenderQq();
         SendMessage.sendPrivateMessage(getContent(), senderQq, false);
         logger.info("发送历史上的今天成功,在私聊《" + senderQq + "》");
-
     }
 
     @Override

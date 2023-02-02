@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.config.KeyWordHandlerFactory;
-import com.orange.qqbot.core.CommonHandler;
+import com.orange.qqbot.core.factory.KeyWordHandlerFactory;
+import com.orange.qqbot.core.KeywordHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -28,7 +28,7 @@ import java.util.HashMap;
  * @description : 热搜处理内置类
  */
 @Component
-public class HotSearchHandle implements CommonHandler {
+public class HotSearchHandle implements KeywordHandler {
     private static final Logger logger = LoggerFactory.getLogger(HotSearchHandle.class);
 
     private static JSONObject postMessage;

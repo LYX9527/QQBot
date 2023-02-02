@@ -1,30 +1,19 @@
 package com.orange.qqbot.core;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.core.domain.constant.MessageType;
 import org.springframework.beans.factory.InitializingBean;
 
+/**
+ * @author : yilantingfeng
+ * @version : v1.0
+ * @projectName : QQBot
+ * @package : com.orange.qqbot.core
+ * @className : CommonHander
+ * @description:
+ * @date : 2023/2/2 19:42
+ */
 public interface CommonHandler extends InitializingBean {
-
     <T extends CommonHandler> T init(JSONObject t);
 
-    default void handlePrivate() {
-    }
-
-
-    default void handleGroup() {
-    }
-
-
-    default void run(String messageType) {
-        if (MessageType.GROUP.equals(messageType)) {
-            handleGroup();
-        } else if (MessageType.PRIVATE.equals(messageType)) {
-            handlePrivate();
-        }
-    }
-
-    default String getContent() {
-        return "";
-    }
+    void run();
 }

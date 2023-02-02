@@ -3,8 +3,8 @@ package com.orange.qqbot.core.handle.messagehandle.keyword;
 import cn.hutool.core.date.ChineseDate;
 import com.alibaba.fastjson.JSONObject;
 import com.orange.qqbot.api.SendMessage;
-import com.orange.qqbot.config.KeyWordHandlerFactory;
-import com.orange.qqbot.core.CommonHandler;
+import com.orange.qqbot.core.factory.KeyWordHandlerFactory;
+import com.orange.qqbot.core.KeywordHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -28,7 +28,7 @@ import java.time.format.DateTimeFormatter;
  * @description : 当前时间处理内置类
  */
 @Component
-public class NowTimeHandle implements CommonHandler {
+public class NowTimeHandle implements KeywordHandler {
     private static final Logger logger = LoggerFactory.getLogger(NowTimeHandle.class);
     private static JSONObject postMessage;
 

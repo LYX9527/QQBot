@@ -1,9 +1,9 @@
 package com.orange.qqbot.core.handle.messagehandle.keyword;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.KeyWordHandlerFactory;
-import com.orange.qqbot.config.MessageHandlerFactory;
-import com.orange.qqbot.core.CommonHandler;
+import com.orange.qqbot.core.factory.EventHandlerFactory;
+import com.orange.qqbot.core.factory.KeyWordHandlerFactory;
+import com.orange.qqbot.core.KeywordHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.KeyWord;
 import com.orange.qqbot.core.domain.constant.MessageType;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
  * @date : 2023/1/8 17:46
  */
 @Component
-public class KeyWordHandle implements CommonHandler {
+public class KeyWordHandle implements KeywordHandler {
 
     private static JSONObject postMessage;
 
@@ -39,11 +39,11 @@ public class KeyWordHandle implements CommonHandler {
             MessageParser messageParser = new MessageParser(postMessage);
             message = messageParser.getAtMessage();
         }
-        CommonHandler invokeHandler = KeyWordHandlerFactory.getInvokeHandler(message.trim(), messageType);
+        KeywordHandler invokeHandler = KeyWordHandlerFactory.getInvokeHandler(message.trim(), messageType);
         try {
             invokeHandler.init(postMessage).run(messageType);
         } catch (Exception e) {
-            MessageHandlerFactory.getInvokeHandler(Constants.DEFAULT).init(postMessage).run();
+            EventHandlerFactory.getInvokeHandler(Constants.DEFAULT).init(postMessage).run();
         }
     }
 

@@ -1,7 +1,7 @@
 package com.orange.qqbot.core.handle;
 
 import com.alibaba.fastjson.JSONObject;
-import com.orange.qqbot.config.MessageHandlerFactory;
+import com.orange.qqbot.core.factory.EventHandlerFactory;
 import com.orange.qqbot.core.MessageHandler;
 import com.orange.qqbot.core.domain.constant.Constants;
 import com.orange.qqbot.core.domain.constant.PostType;
@@ -43,6 +43,6 @@ public class MetaEvenHandle implements MessageHandler {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        MessageHandlerFactory.register(PostType.META_EVENT, this);
+        EventHandlerFactory.register(PostType.META_EVENT, this);
     }
 }

@@ -153,5 +153,59 @@ public class MessageParser {
                 });
     }
 
+    /**
+     * 获取消息id
+     *
+     * @return 消息id
+     */
+    public String getMessageId() {
+        String messageId = postMessage.getString(Constants.MESSAGE_ID);
+        return Optional.ofNullable(messageId)
+                .orElseGet(() -> {
+                    logger.error("getMessageId error");
+                    return "";
+                });
+    }
 
+    /**
+     * 获取操作撤回消息的qq号
+     *
+     * @return qq号
+     */
+    public String getOperatorId() {
+        String operatorId = postMessage.getString(Constants.OPERATOR_ID);
+        return Optional.ofNullable(operatorId)
+                .orElseGet(() -> {
+                    logger.error("getOperatorId error");
+                    return "";
+                });
+    }
+
+    /**
+     * 获取消息归属qq号
+     *
+     * @return qq号
+     */
+    public String getUserId() {
+        String userId = postMessage.getString(Constants.USER_ID);
+        return Optional.ofNullable(userId)
+                .orElseGet(() -> {
+                    logger.error("getUserId error");
+                    return "";
+                });
+    }
+
+    /**
+     * 获取消息发生时间
+     *
+     * @return 时间
+     */
+    public Long getTime() {
+        Long time = postMessage.getLong(Constants.TIME);
+        return Optional.ofNullable(time)
+                .orElseGet(() -> {
+                    logger.error("getTime error");
+                    return 0L;
+                });
+    }
 }

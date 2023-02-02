@@ -27,7 +27,7 @@ public class NoticeType {
      */
     public static final String GROUP_INCREASE = "group_increase";
     /**
-     * 好友添加
+     * 群禁言
      */
     public static final String GROUP_BAN = "group_ban";
     /**

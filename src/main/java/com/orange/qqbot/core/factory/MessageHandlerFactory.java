@@ -1,4 +1,4 @@
-package com.orange.qqbot.config;
+package com.orange.qqbot.core.factory;
 
 import com.orange.qqbot.core.MessageHandler;
 import org.apache.commons.lang3.StringUtils;
