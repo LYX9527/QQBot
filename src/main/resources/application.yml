@@ -17,3 +17,12 @@ spring:
     username: root
     password: root123456
     driverClassName: com.mysql.cj.jdbc.Driver
+xxl:
+  job:
+    accessToken: default_token
+    admin:
+      addresses: 'http://192.168.2.158:11111/xxl-job-admin'
+    executor:
+      appname: 'qbot'
+      address: 192.168.2.92
+      port: 9012
