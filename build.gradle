@@ -24,15 +24,17 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.0.2'
     runtimeOnly 'mysql:mysql-connector-java'
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.83'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
-    implementation 'cn.hutool:hutool-all:5.8.3'
+    implementation 'cn.hutool:hutool-all:5.8.12'
     implementation 'org.aspectj:aspectjweaver:1.9.19'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.baomidou:mybatis-plus-boot-starter:3.5.3.1'
     implementation group: 'com.xuxueli', name: 'xxl-job-core', version: '2.3.1'
+    implementation 'com.github.xiaoymin:knife4j-springdoc-ui:3.0.3'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
 }
 
 tasks.named('test') {

@@ -1,4 +1,5 @@
 qbot:
+  version: 1.0.0
   url: 192.168.2.158:5700
   botqq: 2023311861
   adminqq: 2632938870
@@ -9,7 +10,7 @@ spring:
     path match:
       matching-strategy: ant_path_matcher
   application:
-    name: business
+    name: QQBot
   profiles:
     active: dev
   datasource:
@@ -26,3 +27,13 @@ xxl:
       appname: 'qbot'
       address: 192.168.2.92
       port: 9012
+# 配置swagger文档的访问路径
+# open api配置
+springdoc:
+  packages-to-scan: com.orange.qqbot.entrance
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
