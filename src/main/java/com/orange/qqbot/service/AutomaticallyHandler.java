@@ -2,16 +2,12 @@ package com.orange.qqbot.service;
 
 import com.orange.qqbot.api.SendMessage;
 import com.orange.qqbot.core.domain.constant.CQ;
-import com.orange.qqbot.core.domain.constant.Constants;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.executor.XxlJobExecutor;
 import com.xxl.job.core.handler.IJobHandler;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * @author : yilantingfeng
@@ -25,16 +21,6 @@ import java.time.format.DateTimeFormatter;
 @Component
 @Slf4j
 public class AutomaticallyHandler extends IJobHandler {
-    public void autoJob() {
-        SendMessage.sendPrivateMessage(CQ.getCQFace("13") + "整点报时,现在是北京时间:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMATTER)), "2632938870", false);
-        SendMessage.sendGroupMessage(CQ.getCQFace("13") + "整点报时,现在是北京时间:" + LocalDateTime.now().format(DateTimeFormatter.ofPattern(Constants.DATE_TIME_FORMATTER)), "1046681020", false);
-    }
-    // 自动起床0 0 7 * * ?
-
-    public void wakeUpAutomatically(String groupId, String qq) {
-        SendMessage.sendGroupMessage(CQ.getCQPoke(qq), groupId, false);
-        SendMessage.sendGroupMessage(CQ.getCQAt(qq) + "起床啦！", groupId, false);
-    }
 
     @Override
     public void execute() {
@@ -59,5 +45,10 @@ public class AutomaticallyHandler extends IJobHandler {
     @PostConstruct
     public void init() {
         XxlJobExecutor.registJobHandler(AutomaticallyHandler.class.getSimpleName(), this);
+    }
+
+    private void wakeUpAutomatically(String groupId, String qq) {
+        SendMessage.sendGroupMessage(CQ.getCQPoke(qq), groupId, false);
+        SendMessage.sendGroupMessage(CQ.getCQAt(qq) + "起床啦！", groupId, false);
     }
 }
