@@ -22,4 +22,9 @@ public class Api {
      * 获取消息
      */
     public static final String GET_MSG = "/get_msg";
+
+    /**
+     * chatGPT代理地址
+     */
+    public static final String GPT_API = "/v1/chat/completions";
 }

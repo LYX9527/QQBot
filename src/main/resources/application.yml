@@ -13,11 +13,7 @@ spring:
     name: QQBot
   profiles:
     active: dev
-  datasource:
-    url: jdbc:mysql://124.223.203.125:3306/qbot?useUnicode=true&characterEncoding=UTF-8&useSSL=false&zeroDateTimeBehavior=convertToNull&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
-    username: root
-    password: root123456
-    driverClassName: com.mysql.cj.jdbc.Driver
+
 xxl:
   job:
     accessToken: default_token
@@ -37,3 +33,6 @@ springdoc:
   api-docs:
     enabled: true
     path: /v3/api-docs
+#plumelog:
+#  appName: QQBot
+#  kafkaHosts: 121.41.168.174:9092

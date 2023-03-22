@@ -60,6 +60,5 @@ public class SendMessage {
         params.put(Constants.MESSAGE, message);
         params.put(Constants.AUTO_ESCAPE, autoEscape);
         String s = OkHttpUtil.postJsonParams(requestUrl, params.toJSONString(), new HashMap<>());
-        System.out.println(s);
     }
 }

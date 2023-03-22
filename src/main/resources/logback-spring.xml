@@ -62,7 +62,6 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-
     <!-- 用户访问日志输出  -->
     <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/sys-user.log</file>
@@ -76,7 +75,15 @@
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
-
+    <!-- 环境配置 -->
+    <!--    <springProperty scope="context" name="plumelog.appName" source="plumelog.appName"/>-->
+    <!--    <springProperty scope="context" name="plumelog.kafkaHosts" source="plumelog.kafkaHosts"/>-->
+    <!--    <springProperty scope="context" name="plumelog.env" source="spring.profiles.active"/>-->
+    <!-- 输出plumelog -->
+    <!--    <appender name="plumelog" class="com.plumelog.logback.appender.KafkaAppender">-->
+    <!--        <appName>${plumelog.appName}</appName>-->
+    <!--        <kafkaHosts>${plumelog.kafkaHosts}</kafkaHosts>-->
+    <!--    </appender>-->
     <!-- 系统模块日志级别控制  -->
     <logger name="com.orange" level="info"/>
     <!-- Spring日志级别控制  -->
@@ -87,6 +94,7 @@
         <appender-ref ref="console"/>
         <appender-ref ref="file_info"/>
         <appender-ref ref="file_error"/>
+        <!--        <appender-ref ref="plumelog"/>-->
     </root>
 
     <!--系统用户操作日志-->
